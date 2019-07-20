@@ -41,7 +41,7 @@
             // Try to cache your selectors as posible
             // Here's a sample :
             var searchForm = $('#search-form');
-            var sample = $(".postmini");
+            var sample = document.getElementById("cat-keyword").value;
 
             //These are the variables we need to request from the API
             var API_URL = 'https://api.thecatapi.com/v1/breeds/search?q=';
@@ -71,14 +71,18 @@
                     
                     $.ajax({
                         method: 'GET',
-                        url: 'https://api.thecatapi.com/v1/breeds/search?q=' + searchForm, 
+                        url: 'https://api.thecatapi.com/v1/breeds/search?q=' + sample, 
+                        dataType: 'json',
                         headers:{
                             'bd38af4d-fba6-4d1f-bbfd-a98cc4e036d1' : API_KEY
-                        }.then(function(res){
-                            console.log(res);
-                        })
+                        },
+                        success:function(rest){
+                            console.log(rest);
+                        }
+                
 
                     })
+                   
                     // Your query here (the value from the search form)
                     // Here are the STEPS that MIGHT HELP you in presenting the results
                     // 1.) Make an AJAX call from the API (use the snippet above)
