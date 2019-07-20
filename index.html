@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Sample</h1>
+            <h1>CATS MANIA</h1>
         </div>
     </header>
 
@@ -74,14 +74,9 @@
                         url: 'https://api.thecatapi.com/v1/breeds/search?q=' + searchForm, 
                         headers:{
                             'bd38af4d-fba6-4d1f-bbfd-a98cc4e036d1' : API_KEY
-                        },contentType:'application/json; charset=utf-8',
-                        success: function(result){
-                            console.log(result);
-
-                        },
-                        error: function(error) {
-                            
-                        }
+                        }.then(function(res){
+                            console.log(res);
+                        })
 
                     })
                     // Your query here (the value from the search form)
