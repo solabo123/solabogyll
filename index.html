@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>CATS MANI</h1>
+            <h1>CATS MANIA/h1>
         </div>
     </header>
 
@@ -22,17 +22,31 @@
     </div>
 
     <div  id="trick" >
-            <img src="./public/img/cat2.gif" height="100px" width="100px">
+            <img src="./public/img/cat2.gif" height="100px" width="150px">
           
         <ul id="result"> </ul>
         <!-- Do some awesome stuff here -->
     </div>
     <div class="container cat-search" id="stackload" >
-            <img src="./public/img/cat.gif" height="100px" width="100px" id="cat1">
+            <img src="./public/img/cat.gif" height="100px" width="150px" id="cat1">
           
-        <ul id="result"> </ul>
+        
         <!-- Do some awesome stuff here -->
     </div>
+ 
+    <section>
+            <div  >
+                    <ul id="data">
+                        </ul>
+            </div>
+    </section>
+           
+
+       
+    
+    </div>
+   
+    
 
     <script src="./public/js/jquery.min.js"></script>
     <script>
@@ -41,7 +55,9 @@
             // Try to cache your selectors as posible
             // Here's a sample :
             var searchForm = $('#search-form');
-            var sample = document.getElementById("cat-keyword").value;
+            var parsedata = $('#data');
+            var items = '';
+            var sample = $('#cat-keyword').value;
 
             //These are the variables we need to request from the API
             var API_URL = 'https://api.thecatapi.com/v1/breeds/search?q=';
@@ -62,6 +78,8 @@
                     $("#trick").show();
                     $("#stackload").hide();
 
+                
+
   
 
 
@@ -71,16 +89,20 @@
                     
                     $.ajax({
                         method: 'GET',
-                        url: 'https://api.thecatapi.com/v1/breeds/search?q=' + sample, 
-                        dataType: 'json',
+                        url: 'https://api.thecatapi.com/v1/breeds/search?q=' + document.getElementById("cat-keyword").value, 
                         headers:{
-                            'bd38af4d-fba6-4d1f-bbfd-a98cc4e036d1' : API_KEY
-                        },
-                        success:function(rest){
-                            console.log(rest);
+                            'x-api-key' : 'bd38af4d-fba6-4d1f-bbfd-a98cc4e036d1'
                         }
-                
+                    }).then(function(res){
+                        var users = res;
 
+                        users.forEach(user => {
+                            items +="Search for Result"+document.getElementById("cat-keyword").value+`<li id="contai">${user.name}<br>${user.origin}<br>${user.description}<br><a href="${user.wikipedia_url}">${user.wikipedia_url}</a></li>`
+                        });
+                    
+                        parsedata.append(items);
+                        $("#trick").hide();
+                        
                     })
                    
                     // Your query here (the value from the search form)
@@ -111,7 +133,7 @@
                                 //     Display cat.gif
                             })
                             .catch(function(error){
-                                document.getElementById("result").innerHTML = error.message;
+                               
                                 // Handle error here IF NEEDED
                             })
                             .then(function(){
