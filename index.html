@@ -85,11 +85,11 @@
                         var users = res;
                         var text = "Search for Results";
                         var $noresults = "No search results for ";
-                        var $text = document.getElementById("cat-keyword").value;
+                        var $textField = document.getElementById("cat-keyword").value;
                         var items = "";
                         if(users.length==0){
                               
-                             items +=`<h1 id="noresult">No Results for ${$text} </h1>`;
+                             items +=`<h1 id="noresult">No Results for ${$textField} </h1>`;
                              parsedata.append(items);
                              $("#stackload").show();
                              $("#trick").hide();
